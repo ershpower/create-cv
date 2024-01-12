@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+
+/*DDBDD5*/
+/*AC9FBB*/
+/*59656F*/
 body{
   font-family: 'Roboto';
+  background: #dfdfdf;
+}
+
+.container{
+  margin: 0 auto;
+  max-width: 85%;
 }

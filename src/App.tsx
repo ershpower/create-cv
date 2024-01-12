@@ -1,13 +1,28 @@
 import React from 'react';
 
-import { Header } from './components';
+import {
+    Education,
+    Experience,
+    Header,
+    PersonalInfo,
+    SectionTitle,
+    Skills,
+} from './components';
 
 function App() {
     return (
-        <div className="App">
+        <div className="App container">
             <Header />
+            <SectionTitle title={'Персональная информация'} />
+            <PersonalInfo />
+            <SectionTitle title={'Образование'} />
+            <Education />
+            <SectionTitle title={'Навыки'} />
+            <Skills />
+            <SectionTitle title={'Опыт работы'} />
+            <Experience />
         </div>
     );
 }
 
-export default App;
+export { App };
