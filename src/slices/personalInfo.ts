@@ -6,7 +6,7 @@ import { IPersonalInfo } from '../types';
 const initialState: IPersonalInfo = {
     address: '',
     fio: '',
-    birthday: undefined,
+    birthday: null,
     phone: '',
     avatar: '',
 };
