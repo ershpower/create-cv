@@ -1,24 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { List, Select } from 'antd';
 
 import './style.css';
 
+import { setSkills } from '../../slices';
+import { RootState } from '../../store';
 import { Card, Control } from '..';
 import { skillOptions } from './constants';
 
 const Skills = () => {
-    const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+    const dispatch = useDispatch();
+    const skills = useSelector((state: RootState) => state.skills);
 
     const handleChange = (value: string[]) => {
-        setSelectedSkills(value);
+        dispatch(setSkills(value));
     };
 
     return (
         <Card>
             <Control label={'Навыки'}>
                 <Select
-                    value={selectedSkills}
+                    value={skills.skills}
                     mode="multiple"
                     allowClear
                     style={{ minWidth: '300px' }}
@@ -28,7 +32,7 @@ const Skills = () => {
                 />
             </Control>
             <List
-                dataSource={selectedSkills}
+                dataSource={skills.skills}
                 locale={{ emptyText: '' }}
                 renderItem={(item) => (
                     <List.Item>

@@ -1,11 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { educationSlice, personalInfoSlice } from './slices';
+import { educationSlice, personalInfoSlice, skillsSlice } from './slices';
 
 export const store = configureStore({
     reducer: {
         personalInfo: personalInfoSlice.reducer,
         education: educationSlice.reducer,
+        skills: skillsSlice.reducer,
     },
 });
 
