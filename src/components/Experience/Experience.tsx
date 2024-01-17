@@ -1,62 +1,90 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Button, DatePickerProps, Input } from 'antd';
-import { DatePicker } from 'antd';
-
-const { RangePicker } = DatePicker;
-import { RangePickerProps } from 'antd/es/date-picker';
-const { TextArea } = Input;
 import { DeleteOutlined } from '@ant-design/icons';
-import dayjs from 'dayjs';
+import { Button, DatePicker, Input } from 'antd';
+import { Dayjs } from 'dayjs';
 
+import {
+    addExperience,
+    deleteExperience,
+    updateExperience,
+} from '../../slices';
+import { RootState } from '../../store';
 import { IExperience } from '../../types';
 import { Card, Control } from '..';
 import * as S from './style';
 
-const initialState: IExperience = {
-    company: '',
-    position: '',
-    description: '',
-    period: [dayjs(), dayjs()],
-};
+const { RangePicker } = DatePicker;
+const { TextArea } = Input;
 
 const Experience = () => {
-    const [experience, setExperience] = useState<IExperience[]>([initialState]);
-    const onChange = (
-        value: DatePickerProps['value'] | RangePickerProps['value'],
-        dateString: [string, string] | string
-    ) => {
-        console.log('Selected Time: ', value);
-        console.log('Formatted Selected Time: ', dateString);
-    };
-
+    const dispatch = useDispatch();
+    const experience = useSelector((state: RootState) => state.experience);
     const handleAdd = () => {
-        setExperience((prev) => [...prev, initialState]);
+        dispatch(addExperience());
     };
 
     const handleDelete = (index: number) => {
-        const newState = [
-            ...experience.slice(0, index),
-            ...experience.slice(index + 1),
-        ];
-
-        setExperience(newState);
+        dispatch(deleteExperience(index));
     };
+
+    const handleUpdate = (
+        value: string,
+        field: keyof IExperience,
+        index: number
+    ) => {
+        const currentItem = experience[index];
+        const newItem = {
+            ...currentItem,
+            [field]: value,
+        };
+
+        dispatch(updateExperience({ currentItem: newItem, index }));
+    };
+
+    const handleChangePeriod = (
+        dates: null | [Dayjs | null, Dayjs | null],
+        dateStrings: string[],
+        index: number
+    ) => {
+        if (!dates) return;
+        const currentItem = experience[index];
+        const newItem = {
+            ...currentItem,
+            period: dates,
+        };
+        dispatch(updateExperience({ currentItem: newItem, index }));
+    };
+
+    const handleChange =
+        (field: keyof IExperience, index: number) =>
+        (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+            handleUpdate(e.target.value, field, index);
 
     return (
         <Card>
             {experience.map((item, index) => (
-                <React.Fragment key={Math.random()}>
+                <React.Fragment key={item.id}>
                     <S.ExperienceTitle>
                         Место работы - {index + 1}
-                        <DeleteOutlined onClick={() => handleDelete(index)} />
+                        {index !== 0 && (
+                            <DeleteOutlined
+                                onClick={() => handleDelete(index)}
+                            />
+                        )}
                     </S.ExperienceTitle>
                     <Control label={'Компания'}>
-                        <Input value={item.company} placeholder={'Компания'} />
+                        <Input
+                            value={item.company}
+                            onChange={handleChange('company', index)}
+                            placeholder={'Компания'}
+                        />
                     </Control>
                     <Control label={'Должность'}>
                         <Input
                             value={item.position}
+                            onChange={handleChange('position', index)}
                             placeholder={'Должность'}
                         />
                     </Control>
@@ -64,12 +92,19 @@ const Experience = () => {
                         <RangePicker
                             value={item.period}
                             format="YYYY-MM-DD"
-                            onChange={onChange}
+                            onChange={(
+                                dates: null | [Dayjs | null, Dayjs | null],
+                                dateStrings: string[]
+                            ) => handleChangePeriod(dates, dateStrings, index)}
                             placeholder={['Начало', 'Конец']}
                         />
                     </Control>
                     <Control label={'Описание'}>
-                        <TextArea value={item.description} rows={5} />
+                        <TextArea
+                            value={item.description}
+                            onChange={handleChange('description', index)}
+                            rows={5}
+                        />
                     </Control>
                 </React.Fragment>
             ))}
