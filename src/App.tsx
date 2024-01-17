@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { FloatButton } from 'antd';
 
 import {
     Education,
@@ -8,8 +10,14 @@ import {
     SectionTitle,
     Skills,
 } from './components';
+import Preview from './components/Preview/Preview';
 
 function App() {
+    const [isOpenPreview, setIsOpenPreview] = useState(false);
+
+    const handleOpenPreview = () => setIsOpenPreview(true);
+    const handleClosePreview = () => setIsOpenPreview(false);
+
     return (
         <div className="App container">
             <Header />
@@ -21,6 +29,13 @@ function App() {
             <Skills />
             <SectionTitle title={'Опыт работы'} />
             <Experience />
+            <FloatButton
+                type="primary"
+                style={{ width: '100px', height: '100px' }}
+                description={'Показать превью'}
+                onClick={handleOpenPreview}
+            />
+            <Preview isOpen={isOpenPreview} onClose={handleClosePreview} />
         </div>
     );
 }
