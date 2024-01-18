@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LeftWrapper = styled.div`
-    flex: 0 0 190px;
+    flex: 0 0 250px;
     padding: 25px;
     background: #ececec;
 `;
@@ -17,4 +17,20 @@ export const Title = styled.p`
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
+`;
+
+export const Title2 = styled.div`
+    color: #03064f;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+`;
+
+export const SkillWrapper = styled.div`
+    margin-top: 30px;
+`;
+
+export const SkillsList = styled.ul`
+    margin-top: 4px;
+    margin-left: 24px;
 `;

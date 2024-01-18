@@ -11,7 +11,7 @@ interface IPreviewProps {
 }
 const Preview: FC<IPreviewProps> = ({ isOpen, onClose }) => {
     return (
-        <Modal width={643} open={isOpen} onCancel={onClose} footer={null}>
+        <Modal width={800} open={isOpen} onCancel={onClose} footer={null}>
             <S.PreviewWrapper>
                 <Left />
             </S.PreviewWrapper>
