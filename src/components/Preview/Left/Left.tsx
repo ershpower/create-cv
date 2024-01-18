@@ -5,7 +5,6 @@ import { ConsoleSqlOutlined } from '@ant-design/icons';
 
 import { RootState } from '../../../store';
 import * as S from './style';
-import { SkillsList } from './style';
 import { getAge, getBirthday } from './utils';
 
 const Left = () => {
