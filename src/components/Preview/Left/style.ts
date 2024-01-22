@@ -17,6 +17,7 @@ export const Title = styled.p`
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
+    margin-top: 20px;
 `;
 
 export const Title2 = styled.div`

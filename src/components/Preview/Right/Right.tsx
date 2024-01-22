@@ -1,9 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { CalendarOutlined } from '@ant-design/icons';
+import { CalendarOutlined, ReadOutlined } from '@ant-design/icons';
 
 import { RootState } from '../../../store';
+import EducationPdf from './EducationPdf/EducationPdf';
 import * as S from './style';
 import { getFormattedPeriod } from './utils';
 const Right = () => {
@@ -14,6 +15,11 @@ const Right = () => {
         <S.Wrapper>
             <S.MegaTitle>{fio}</S.MegaTitle>
             <S.Position>{'Frontend Developer'}</S.Position>
+            <S.BigTitle>
+                <ReadOutlined />
+                Образование
+            </S.BigTitle>
+            <EducationPdf />
             <S.BigTitle>
                 <CalendarOutlined />
                 Опыт работы

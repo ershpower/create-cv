@@ -1,7 +1,7 @@
 import React, { FC, useRef } from 'react';
 import { useReactToPrint } from 'react-to-print';
 
-import { Modal } from 'antd';
+import { Button, Modal } from 'antd';
 
 import Left from './Left/Left';
 import { Right } from './Right/Right';
@@ -23,7 +23,9 @@ const Preview: FC<IPreviewProps> = ({ isOpen, onClose }) => {
                 <Left />
                 <Right />
             </S.PreviewWrapper>
-            <button onClick={generatePDF}>click</button>
+            <S.PdfButtonWrapper>
+                <Button onClick={generatePDF}>Скачать</Button>
+            </S.PdfButtonWrapper>
         </Modal>
     );
 };

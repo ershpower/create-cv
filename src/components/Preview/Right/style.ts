@@ -20,18 +20,20 @@ export const Position = styled.div`
 `;
 
 export const BigTitle = styled.p`
-    margin-top: 8px;
+    margin-top: 16px;
     color: #03064f;
     font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
     display: flex;
     gap: 8px;
+    margin-bottom: 10px;
 `;
 
 export const WorkHeader = styled.div`
     background: #eef4ff;
     padding: 10px;
+
     p:nth-child(1) {
         font-size: 18px;
         font-weight: 500;
@@ -50,6 +52,7 @@ export const Period = styled.div`
 export const Description = styled.div`
     margin-top: 10px;
     width: 100%;
+    margin-bottom: 20px;
     pre {
         max-width: 100%;
         text-wrap: wrap;
